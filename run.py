@@ -20,10 +20,10 @@ def run_app():
 
     # 2. Start Backend (FastAPI)
     # Using 'start' on Windows to open in a new window for better log visibility
-    print("\n[BACKEND] Starting server at http://localhost:8000...")
+    print("\n[BACKEND] Starting core server on 0.0.0.0:8888...")
     if sys.platform == "win32":
         # Syntax: start "Title" cmd /c "command"
-        backend_proc = subprocess.Popen('start "Cough-AI-Backend" cmd /c "uvicorn api:app --reload --host 0.0.0.0 --port 8000"', shell=True)
+        backend_proc = subprocess.Popen('start "Cough-AI-Backend" cmd /c "uvicorn api:app --reload --host 0.0.0.0 --port 8888"', shell=True)
     else:
         # For Mac/Linux (though user is on Windows)
         backend_proc = subprocess.Popen(["uvicorn", "api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"])
@@ -32,7 +32,20 @@ def run_app():
     time.sleep(3)
 
     # 3. Start Frontend (Vite)
-    print("[FRONTEND] Starting client at http://localhost:3000...")
+    import socket
+    hostname = socket.gethostname()
+    local_ip = "127.0.0.1"
+    try:
+        local_ip = socket.gethostbyname(hostname)
+    except:
+        pass
+
+    print("-" * 50)
+    print(f"🚀 Dashboard Ready!")
+    print(f"   Local:   http://localhost:3000")
+    print(f"   Network: http://{local_ip}:3000")
+    print("-" * 50)
+    
     try:
         frontend_proc = subprocess.Popen(["npm", "run", "dev"], cwd="frontend", shell=True)
         frontend_proc.wait()
