@@ -1,8 +1,5 @@
 librosa
 numpy
-tensorflow; python_version < '3.13'
-tensorflow-intel; platform_system == 'Windows' and python_version < '3.13'
-tensorflow-hub
 scikit-learn
 matplotlib
 seaborn
