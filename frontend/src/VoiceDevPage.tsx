@@ -18,6 +18,7 @@ const VoiceDevPage: React.FC = () => {
     const [recordingTime, setRecordingTime] = useState(0);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [result, setResult] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
     const [progressData] = useState([
         { day: 'Mon', score: 65 },
         { day: 'Tue', score: 68 },
@@ -87,6 +88,7 @@ const VoiceDevPage: React.FC = () => {
     const runAnalysis = async () => {
         if (!audioFile) return;
         setIsAnalyzing(true);
+        setError(null);
         setStep(2);
 
         const formData = new FormData();
@@ -94,10 +96,14 @@ const VoiceDevPage: React.FC = () => {
 
         try {
             const response = await axios.post(`${API_BASE_URL}/api/voice-dev/analyze`, formData);
+            if (response.data.status === 'error') {
+                throw new Error(response.data.message || 'Analysis failed');
+            }
             setResult(response.data);
             setStep(3);
-        } catch (err) {
+        } catch (err: any) {
             console.error("Voice Analysis failed:", err);
+            setError(err.response?.data?.detail || err.message || "Failed to connect to backend server.");
             setStep(1);
         } finally {
             setIsAnalyzing(false);
@@ -151,6 +157,20 @@ const VoiceDevPage: React.FC = () => {
                                         Have the child say "Aaaaaa" or read a short sentence clearly into the microphone.
                                     </p>
                                 </div>
+
+                                {error && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="max-w-xl mx-auto p-6 bg-rose-500/10 border border-rose-500/20 rounded-[1.5rem] flex items-center gap-4 text-rose-400"
+                                    >
+                                        <AlertCircle size={24} />
+                                        <div className="text-left">
+                                            <p className="text-sm font-black uppercase tracking-widest">Analysis Error</p>
+                                            <p className="text-xs font-bold mt-1 opacity-80">{error}</p>
+                                        </div>
+                                    </motion.div>
+                                )}
 
                                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-12">
                                     {!isRecording ? (

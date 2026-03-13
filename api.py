@@ -186,6 +186,7 @@ async def predict(file: UploadFile = File(...), metadata: str = None):
 
 @app.post("/api/voice-dev/analyze")
 async def voice_dev_analyze(file: UploadFile = File(...)):
+    print(f"\n[VOICE-DEV] Received analysis request for: {file.filename}")
     UPLOAD_DIR = "temp_uploads"
     os.makedirs(UPLOAD_DIR, exist_ok=True)
     
@@ -197,10 +198,18 @@ async def voice_dev_analyze(file: UploadFile = File(...)):
         with open(temp_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
+        print(f"[VOICE-DEV] Processing audio...")
         result = analyze_voice_dev(temp_path)
+        
+        if result.get("status") == "error":
+            print(f"[VOICE-DEV] Feature extraction error: {result.get('message')}")
+            raise HTTPException(status_code=500, detail=result.get("message"))
+            
+        print(f"[VOICE-DEV] Analysis complete. Score: {result.get('strength_score')}")
         return result
         
     except Exception as e:
+        print(f"[VOICE-DEV] Critical Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         if os.path.exists(temp_path):
