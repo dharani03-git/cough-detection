@@ -14,7 +14,6 @@ import CoughScreeningPage from './CoughScreeningPage';
 import FollowUpPage from './FollowUpPage';
 import ReferralsPage from './ReferralsPage';
 import PatientRecordsPage from './PatientRecordsPage';
-import VoiceDevPage from './VoiceDevPage';
 import PlaceholderPage from './PlaceholderPage';
 
 import API_BASE_URL from './api-config';
@@ -79,7 +78,6 @@ const App: React.FC = () => {
                         <Route path="/referrals" element={<ReferralsPage />} />
                         <Route path="/records" element={<PatientRecordsPage />} />
                         <Route path="/analytics" element={<AnalyticsPage />} />
-                        <Route path="/voice-dev" element={<VoiceDevPage />} />
                         {/* Fallback */}
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>

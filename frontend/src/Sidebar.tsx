@@ -16,8 +16,7 @@ const navItems = [
     { id: 'followup', icon: Calendar, label: 'Follow-Up', path: '/follow-up' },
     { id: 'referrals', icon: Users, label: 'Referrals', path: '/referrals' },
     { id: 'records', icon: FolderHeart, label: 'Patient Records', path: '/records' },
-    { id: 'analytics', icon: Activity, label: 'Analytics', path: '/analytics' },
-    { id: 'voice-dev', label: 'Voice Dev', icon: Baby, path: '/voice-dev' }
+    { id: 'analytics', icon: Activity, label: 'Analytics', path: '/analytics' }
 ];
 
 interface SidebarProps {

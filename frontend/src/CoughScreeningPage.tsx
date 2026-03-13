@@ -420,8 +420,8 @@ const CoughScreeningPage: React.FC = () => {
                             <div className="col-span-1 lg:col-span-8 space-y-8">
                                 <div className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-[2.5rem] p-6 md:p-10 shadow-2xl h-full flex flex-col">
                                     <div className="flex flex-col sm:flex-row justify-between items-start md:items-center gap-6 mb-10">
-                                        <h3 className="text-xl md:text-2xl font-black flex items-center gap-3">
-                                            <ShieldAlert className="text-red-500" /> Executive Summary
+                                        <h3 className="text-xl md:text-2xl font-black flex items-center gap-3 text-amber-500">
+                                            <AlertCircle className="text-amber-500" /> AI Preliminary Suggestion
                                         </h3>
                                         <div className="flex gap-2 w-full sm:w-auto">
                                             <div className="flex-1 sm:flex-none px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase text-slate-500 text-center">ID: RS-{Math.random().toString(36).substr(2, 6).toUpperCase()}</div>
@@ -429,8 +429,8 @@ const CoughScreeningPage: React.FC = () => {
                                     </div>
 
                                     <div className="flex-grow space-y-8">
-                                        <div className="bg-white/5 border-l-4 border-red-500 p-8 rounded-2xl space-y-4">
-                                            <h4 className="text-lg font-bold text-white uppercase italic">Clinical Note from AI Engine</h4>
+                                        <div className="bg-amber-500/5 border-l-4 border-amber-500 p-8 rounded-2xl space-y-4">
+                                            <h4 className="text-lg font-bold text-white uppercase italic">Consult a Doctor for Verification</h4>
                                             <p className="text-sm text-slate-400 leading-relaxed font-medium">
                                                 Based on the multi-modal integration of acoustic features and reported symptoms (Fever: {symptoms.fever}, Breathing Difficulty: {symptoms.breathingDifficulty}),
                                                 the system identifies a {analysisResult?.risk_level.toLowerCase()}-probability match for {analysisResult?.prediction.toLowerCase()} patterns.
