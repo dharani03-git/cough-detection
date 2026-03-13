@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Mic, Upload, Play, Square, RefreshCw,
-    BrainCircuit, Target, CheckCircle2, AlertTriangle,
+    BrainCircuit, Target, CheckCircle2, AlertTriangle, AlertCircle,
     Activity, ShieldAlert, Thermometer, Wind,
     Cigarette, FileText, ChevronRight, ChevronLeft,
     Waves, Headphones, Zap, Database, Volume2, Download
