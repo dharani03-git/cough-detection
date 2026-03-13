@@ -2,7 +2,8 @@ import React from 'react';
 import {
     LayoutDashboard, UserPlus, Mic, FileText,
     Calendar, Users, FolderHeart, BarChart3,
-    ShieldCheck, Settings, Activity, Zap, Lock, ChevronRight, X
+    ShieldCheck, Settings, Activity, Zap, Lock, ChevronRight, X,
+    Baby
 } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,7 +16,8 @@ const navItems = [
     { id: 'followup', icon: Calendar, label: 'Follow-Up', path: '/follow-up' },
     { id: 'referrals', icon: Users, label: 'Referrals', path: '/referrals' },
     { id: 'records', icon: FolderHeart, label: 'Patient Records', path: '/records' },
-    { id: 'stats', icon: BarChart3, label: 'Analytics', path: '/analytics' },
+    { id: 'analytics', icon: Activity, label: 'Analytics', path: '/analytics' },
+    { id: 'voice-dev', label: 'Voice Dev', icon: Baby, path: '/voice-dev' }
 ];
 
 interface SidebarProps {

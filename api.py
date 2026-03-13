@@ -12,6 +12,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
 from predict import predict_cough
+from voicedev_features import analyze_voice_dev
 
 app = FastAPI(title="Cough AI - Respiratory Risk API")
 
@@ -175,6 +176,28 @@ async def predict(file: UploadFile = File(...), metadata: str = None):
             print(f"DB Error: {db_err}")
 
         result["audit_hash"] = file_hash
+        return result
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+@app.post("/api/voice-dev/analyze")
+async def voice_dev_analyze(file: UploadFile = File(...)):
+    UPLOAD_DIR = "temp_uploads"
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    
+    file_id = str(uuid.uuid4())
+    extension = os.path.splitext(file.filename)[1].lower()
+    temp_path = os.path.join(UPLOAD_DIR, f"vdev_{file_id}{extension}")
+    
+    try:
+        with open(temp_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        result = analyze_voice_dev(temp_path)
         return result
         
     except Exception as e:
