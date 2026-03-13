@@ -1,0 +1,30 @@
+{
+    "name": "cough-ai-frontend",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "axios": "^1.4.0",
+        "framer-motion": "^10.15.0",
+        "lucide-react": "^0.263.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^7.13.1"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4.2.1",
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
+        "@vitejs/plugin-react": "^4.0.3",
+        "autoprefixer": "^10.4.27",
+        "postcss": "^8.5.8",
+        "tailwindcss": "^4.2.1",
+        "typescript": "^5.0.2",
+        "vite": "^4.4.5"
+    }
+}

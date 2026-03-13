@@ -1,0 +1,12 @@
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+history.db
+temp_uploads/
+.venv/
+env/
+*.log
+# Models are small enough for Git, but let's exclude any giant ones
+# models/*.h5
