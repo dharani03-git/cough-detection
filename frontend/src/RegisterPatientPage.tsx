@@ -72,22 +72,22 @@ const RegisterPatientPage: React.FC = () => {
         }
     };
 
-    const inputClasses = "w-full bg-[#030712] border border-white/5 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-indigo-500/50 transition-all placeholder:text-slate-600";
+    const inputClasses = "w-full bg-[#030712] border border-white/5 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-indigo-500/50 transition-all placeholder:text-slate-600 text-sm md:text-base";
     const labelClasses = "text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block";
-    const cardClasses = "bg-[#030712] border border-white/5 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden h-full";
+    const cardClasses = "bg-[#030712] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 shadow-2xl relative overflow-hidden h-full";
 
     const symptomsList = ['Dry Cough', 'Productive Cough', 'Sore Throat', 'Fatigue', 'Chest Pain', 'Headache'];
 
     return (
         <div className="space-y-12">
-            <header>
-                <h1 className="text-5xl font-black tracking-tighter">Register Patient</h1>
-                <p className="text-slate-500 font-medium">Create a new electronic health record for a patient intake.</p>
+            <header className="space-y-2">
+                <h1 className="text-4xl md:text-5xl font-black tracking-tighter">Register Patient</h1>
+                <p className="text-slate-500 font-medium text-sm md:text-base">Create a new electronic health record for a patient intake.</p>
             </header>
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-12 gap-8">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
                 {/* Patient Information */}
-                <div className="col-span-12 lg:col-span-8">
+                <div className="col-span-1 lg:col-span-8">
                     <div className={cardClasses}>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="p-2 bg-indigo-500/10 rounded-lg">
@@ -96,7 +96,7 @@ const RegisterPatientPage: React.FC = () => {
                             <h3 className="text-xl font-bold">Patient Information</h3>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="col-span-2 md:col-span-1">
                                 <label className={labelClasses}>Full Name</label>
                                 <input
@@ -188,7 +188,7 @@ const RegisterPatientPage: React.FC = () => {
                 </div>
 
                 {/* Respiratory & Medical Sidecard */}
-                <div className="col-span-12 lg:col-span-4 space-y-8">
+                <div className="col-span-1 lg:col-span-4 space-y-8">
                     <div className={cardClasses}>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="p-2 bg-indigo-500/10 rounded-lg">
@@ -263,7 +263,7 @@ const RegisterPatientPage: React.FC = () => {
                 </div>
 
                 {/* Medical Details */}
-                <div className="col-span-12 lg:col-span-8">
+                <div className="col-span-1 lg:col-span-8">
                     <div className={cardClasses}>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="p-2 bg-indigo-500/10 rounded-lg">
@@ -272,7 +272,7 @@ const RegisterPatientPage: React.FC = () => {
                             <h3 className="text-xl font-bold">Medical Details</h3>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="col-span-2 md:col-span-1">
                                 <label className={labelClasses}>Smoking History</label>
                                 <div className="flex gap-4">
@@ -281,7 +281,7 @@ const RegisterPatientPage: React.FC = () => {
                                             key={opt}
                                             type="button"
                                             onClick={() => setFormData(prev => ({ ...prev, smokingHistory: opt }))}
-                                            className={`flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold ${formData.smokingHistory === opt ? 'bg-indigo-500 border-indigo-500 text-white shadow-xl' : 'bg-white/5 border-white/5 text-slate-500 hover:bg-white/10'}`}
+                                            className={`flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-2 md:gap-3 font-bold text-xs md:text-base ${formData.smokingHistory === opt ? 'bg-indigo-500 border-indigo-500 text-white shadow-xl' : 'bg-white/5 border-white/5 text-slate-500 hover:bg-white/10'}`}
                                         >
                                             <Cigarette size={18} />
                                             {opt === 'Yes' ? 'Active Smoker' : 'Non-Smoker'}
@@ -321,7 +321,7 @@ const RegisterPatientPage: React.FC = () => {
                 </div>
 
                 {/* Uploads */}
-                <div className="col-span-12 lg:col-span-4">
+                <div className="col-span-1 lg:col-span-4">
                     <div className={cardClasses}>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="p-2 bg-indigo-500/10 rounded-lg">
@@ -346,25 +346,25 @@ const RegisterPatientPage: React.FC = () => {
                 </div>
 
                 {/* Submission Bar */}
-                <div className="col-span-12">
-                    <div className="flex items-center justify-between bg-indigo-500/5 border border-indigo-500/20 p-6 rounded-[2rem] backdrop-blur-3xl shadow-2xl">
+                <div className="col-span-1 lg:col-span-12">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-indigo-500/5 border border-indigo-500/20 p-6 rounded-2xl md:rounded-[2rem] backdrop-blur-3xl shadow-2xl gap-6">
                         <div className="flex items-center gap-4 text-indigo-400">
-                            <CheckCircle2 size={24} />
-                            <p className="text-sm font-bold italic tracking-tight">Ensure all critical health indicators are documented before submission.</p>
+                            <CheckCircle2 size={24} className="shrink-0" />
+                            <p className="text-sm font-bold italic tracking-tight leading-snug">Ensure all critical health indicators are documented before submission.</p>
                         </div>
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 w-full md:w-auto">
                             <button
                                 type="button"
                                 onClick={clearForm}
-                                className="px-8 py-4 bg-white/5 border border-white/10 text-slate-400 font-bold rounded-2xl hover:bg-white/10 transition-all"
+                                className="flex-1 md:flex-none px-6 md:px-8 py-3 md:py-4 bg-white/5 border border-white/10 text-slate-400 font-bold rounded-xl md:rounded-2xl hover:bg-white/10 transition-all text-xs md:text-base"
                             >
-                                CLEAR FORM
+                                CLEAR
                             </button>
                             <button
                                 type="submit"
-                                className="px-12 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-black rounded-2xl shadow-2xl shadow-indigo-600/30 hover:from-indigo-500 hover:to-violet-500 transition-all"
+                                className="flex-1 md:flex-none px-6 md:px-12 py-3 md:py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-black rounded-xl md:rounded-2xl shadow-2xl shadow-indigo-600/30 hover:from-indigo-500 hover:to-violet-500 transition-all text-xs md:text-base"
                             >
-                                REGISTER PATIENT
+                                REGISTER
                             </button>
                         </div>
                     </div>
@@ -377,7 +377,7 @@ const RegisterPatientPage: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9, y: 100 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 100 }}
-                        className="fixed bottom-12 right-12 z-50"
+                        className="fixed bottom-6 right-6 md:bottom-12 md:right-12 z-50 max-w-[calc(100vw-3rem)]"
                     >
                         <div className="bg-emerald-500 text-white flex items-center gap-4 px-8 py-5 rounded-3xl shadow-[0_20px_60px_-15px_rgba(16,185,129,0.5)]">
                             <CheckCircle2 size={32} />

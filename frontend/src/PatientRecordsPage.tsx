@@ -154,29 +154,29 @@ const PatientRecordsPage: React.FC = () => {
 
     return (
         <div className="space-y-12 pb-20">
-            <header className="flex justify-between items-end">
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div>
-                    <h1 className="text-5xl font-black tracking-tighter">Patient Records</h1>
-                    <p className="text-slate-500 font-medium">Comprehensive respiratory health database.</p>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter">Patient Records</h1>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Comprehensive respiratory health database.</p>
                 </div>
             </header>
 
             {/* Summary Cards */}
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-[#030712] border border-white/5 rounded-3xl p-6 flex items-center gap-6 shadow-xl"
+                        className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-3xl p-6 flex items-center gap-6 shadow-xl"
                     >
-                        <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center`}>
-                            <stat.icon size={28} />
+                        <div className={`w-12 h-12 md:w-14 md:h-14 ${stat.bg} ${stat.color} rounded-xl md:rounded-2xl flex items-center justify-center shrink-0`}>
+                            <stat.icon size={28} className="w-6 h-6 md:w-7 md:h-7" />
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-tight">{stat.label}</p>
-                            <p className="text-3xl font-black mt-1">{stat.value}</p>
+                            <p className="text-2xl md:text-3xl font-black mt-1">{stat.value}</p>
                         </div>
                     </motion.div>
                 ))}
@@ -199,7 +199,7 @@ const PatientRecordsPage: React.FC = () => {
             </div>
 
             {/* Database Table */}
-            <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl overflow-x-auto custom-scrollbar">
+            <div className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-2xl overflow-x-auto no-scrollbar">
                 <table className="w-full text-left border-collapse min-w-[1200px]">
                     <thead>
                         <tr className="bg-white/5 border-b border-white/5">

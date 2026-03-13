@@ -24,19 +24,19 @@ const AnalyticsPage: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="space-y-12"
         >
-            <header className="flex justify-between items-end">
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div>
-                    <h1 className="text-5xl font-black tracking-tighter">Clinical Analytics</h1>
-                    <p className="text-slate-500 font-medium">Longitudinal biomarker trends and population telemetry.</p>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter">Clinical Analytics</h1>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Longitudinal biomarker trends and population telemetry.</p>
                 </div>
                 <div className="flex gap-2">
                     <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">Live Sync Active</span>
                 </div>
             </header>
 
-            <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Trend Chart */}
-                <div className="col-span-12 lg:col-span-8 bg-[#030712] border border-white/5 rounded-[2.5rem] p-10 space-y-10 shadow-2xl relative overflow-hidden">
+                <div className="col-span-1 lg:col-span-8 bg-[#030712] border border-white/5 rounded-2xl md:rounded-[2.5rem] p-6 md:p-10 space-y-10 shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 opacity-5">
                         <TrendingUp size={120} />
                     </div>
@@ -92,8 +92,8 @@ const AnalyticsPage: React.FC = () => {
                 </div>
 
                 {/* KPI Sidebar */}
-                <div className="col-span-12 lg:col-span-4 space-y-8">
-                    <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] p-8 shadow-2xl space-y-8">
+                <div className="col-span-1 lg:col-span-4 space-y-8">
+                    <div className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-[2.5rem] p-6 md:p-8 shadow-2xl space-y-8">
                         <div className="bg-white/5 border border-white/5 p-6 rounded-2xl">
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
                                 <HeartPulse size={12} className="text-red-500" /> Patient Risk Entropy

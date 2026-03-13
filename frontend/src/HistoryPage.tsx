@@ -47,22 +47,23 @@ const HistoryPage: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="space-y-12"
         >
-            <header className="flex justify-between items-end">
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div>
-                    <h1 className="text-5xl font-black tracking-tighter">AI Risk Report</h1>
-                    <p className="text-slate-500 font-medium">Longitudinal diagnostic outcomes and biometric audit logs.</p>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter">AI Risk Report</h1>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Longitudinal diagnostic outcomes and biometric audit logs.</p>
                 </div>
                 <button
                     onClick={fetchHistory}
                     disabled={isLoading}
-                    className="flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/5 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all text-slate-400 hover:text-white"
+                    className="w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/5 rounded-xl md:rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all text-slate-400 hover:text-white"
                 >
                     <RefreshCw className={isLoading ? 'animate-spin' : ''} size={16} /> Sync Records
                 </button>
             </header>
 
-            <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <table className="w-full text-left border-collapse">
+            <div className="bg-[#030712] border border-white/5 rounded-xl md:rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <div className="overflow-x-auto no-scrollbar">
+                    <table className="w-full text-left border-collapse min-w-[1000px]">
                     <thead>
                         <tr className="bg-white/5 border-b border-white/5">
                             <th className="px-10 py-8 text-[10px] font-black text-slate-500 uppercase tracking-widest">Biometric Node</th>
@@ -152,6 +153,7 @@ const HistoryPage: React.FC = () => {
                         )}
                     </tbody>
                 </table>
+                </div>
             </div>
         </motion.div>
     );

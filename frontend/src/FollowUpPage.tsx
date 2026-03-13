@@ -79,29 +79,29 @@ const FollowUpPage: React.FC = () => {
 
     return (
         <div className="space-y-12 pb-20">
-            <header className="flex justify-between items-end">
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div>
-                    <h1 className="text-5xl font-black tracking-tighter">Follow-Up Management</h1>
-                    <p className="text-slate-500 font-medium">Post-screening patient monitoring and condition tracking.</p>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter">Follow-Up Management</h1>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Post-screening patient monitoring and condition tracking.</p>
                 </div>
             </header>
 
             {/* Summary Cards */}
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-[#030712] border border-white/5 rounded-3xl p-6 flex items-center gap-6 shadow-xl"
+                        className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-3xl p-6 flex items-center gap-6 shadow-xl"
                     >
-                        <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center`}>
-                            <stat.icon size={28} />
+                        <div className={`w-12 h-12 md:w-14 md:h-14 ${stat.bg} ${stat.color} rounded-xl md:rounded-2xl flex items-center justify-center shrink-0`}>
+                            <stat.icon size={stat.icon === Calendar ? 24 : 28} className="md:w-7 md:h-7" />
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-tight">{stat.label}</p>
-                            <p className="text-3xl font-black mt-1">{stat.value}</p>
+                            <p className="text-2xl md:text-3xl font-black mt-1">{stat.value}</p>
                         </div>
                     </motion.div>
                 ))}
@@ -109,7 +109,7 @@ const FollowUpPage: React.FC = () => {
 
             {/* Controls & Filters */}
             <div className="flex flex-wrap items-center justify-between gap-6">
-                <div className="flex items-center gap-2 bg-white/5 p-1 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5 overflow-x-auto no-scrollbar max-w-full">
                     {[
                         { id: 'Upcoming', label: 'Upcoming Cases' },
                         { id: 'Overdue', label: 'Overdue' },
@@ -118,7 +118,7 @@ const FollowUpPage: React.FC = () => {
                         <button
                             key={btn.id}
                             onClick={() => setFilter(btn.id as any)}
-                            className={`px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${filter === btn.id ? 'bg-indigo-500 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
+                            className={`px-4 md:px-6 py-2 md:py-3 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all shrink-0 ${filter === btn.id ? 'bg-indigo-500 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
                         >
                             {btn.label}
                         </button>
@@ -140,149 +140,151 @@ const FollowUpPage: React.FC = () => {
             </div>
 
             {/* Main Table Content */}
-            <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <table className="w-full text-left border-collapse">
-                    <thead>
-                        <tr className="bg-white/5 border-b border-white/5">
-                            <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Patient Details</th>
+            <div className="bg-[#030712] border border-white/5 rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <div className="overflow-x-auto no-scrollbar">
+                    <table className="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr className="bg-white/5 border-b border-white/5">
+                                <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Patient Details</th>
 
-                            {filter === 'Upcoming' && (
-                                <>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Level</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Next Follow-Up</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Assigned Specialist</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Status</th>
-                                </>
-                            )}
+                                {filter === 'Upcoming' && (
+                                    <>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Level</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Next Follow-Up</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Assigned Specialist</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Status</th>
+                                    </>
+                                )}
 
-                            {filter === 'Overdue' && (
-                                <>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Days Overdue</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Level</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Last Contact</th>
-                                </>
-                            )}
+                                {filter === 'Overdue' && (
+                                    <>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Days Overdue</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Level</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Last Contact</th>
+                                    </>
+                                )}
 
-                            {filter === 'HighRisk' && (
-                                <>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Score</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Condition detected</th>
-                                    <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Priority</th>
-                                </>
-                            )}
+                                {filter === 'HighRisk' && (
+                                    <>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Risk Score</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Condition detected</th>
+                                        <th className="px-8 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Priority</th>
+                                    </>
+                                )}
 
-                            <th className="px-8 py-6 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                        <AnimatePresence mode='popLayout'>
-                            {filteredData.map((patient) => (
-                                <motion.tr
-                                    key={patient.id}
-                                    layout
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    className="group hover:bg-white/[0.02] transition-colors"
-                                >
-                                    <td className="px-8 py-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-500 font-bold group-hover:border-indigo-500/30 transition-all">
-                                                <User size={20} />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-black tracking-tight">{patient.name}</div>
-                                                <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-0.5">{patient.patientId}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    {filter === 'Upcoming' && (
-                                        <>
-                                            <td className="px-8 py-6">{getRiskBadge(patient.riskLevel)}</td>
-                                            <td className="px-8 py-6">
-                                                <div className="flex items-center gap-2 text-sm font-bold text-slate-300">
-                                                    <Calendar size={14} className="text-indigo-400" />
-                                                    {patient.nextFollowUp}
+                                <th className="px-8 py-6 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/5">
+                            <AnimatePresence mode='popLayout'>
+                                {filteredData.map((patient) => (
+                                    <motion.tr
+                                        key={patient.id}
+                                        layout
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="group hover:bg-white/[0.02] transition-colors"
+                                    >
+                                        <td className="px-8 py-6">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-500 font-bold group-hover:border-indigo-500/30 transition-all">
+                                                    <User size={20} />
                                                 </div>
-                                            </td>
-                                            <td className="px-8 py-6 text-sm font-medium text-slate-400">{patient.doctor}</td>
-                                            <td className="px-8 py-6">
-                                                <span className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${patient.status === 'Completed' ? 'text-emerald-400' : 'text-amber-500'}`}>
-                                                    <Clock size={12} /> {patient.status}
-                                                </span>
-                                            </td>
-                                        </>
-                                    )}
-
-                                    {filter === 'Overdue' && (
-                                        <>
-                                            <td className="px-8 py-6 text-center">
-                                                <span className={`px-4 py-1 rounded-lg font-mono font-bold text-lg ${patient.daysOverdue! > 3 ? 'bg-red-500/20 text-red-500' : 'bg-amber-500/20 text-amber-500'}`}>
-                                                    +{patient.daysOverdue}d
-                                                </span>
-                                            </td>
-                                            <td className="px-8 py-6">{getRiskBadge(patient.riskLevel)}</td>
-                                            <td className="px-8 py-6 text-sm font-medium text-slate-400">{patient.lastContact}</td>
-                                        </>
-                                    )}
-
-                                    {filter === 'HighRisk' && (
-                                        <>
-                                            <td className="px-8 py-6">
-                                                <div className="w-full max-w-[100px] h-1.5 bg-white/5 rounded-full overflow-hidden mt-1">
-                                                    <div
-                                                        className="h-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"
-                                                        style={{ width: `${patient.riskScore! * 100}%` }}
-                                                    />
+                                                <div>
+                                                    <div className="text-sm font-black tracking-tight">{patient.name}</div>
+                                                    <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-0.5">{patient.patientId}</div>
                                                 </div>
-                                                <span className="text-[10px] font-black text-red-400 uppercase tracking-widest mt-2 inline-block">{(patient.riskScore! * 100).toFixed(0)}% Criticality</span>
-                                            </td>
-                                            <td className="px-8 py-6 text-sm font-bold text-slate-300 italic">"{patient.condition}"</td>
-                                            <td className="px-8 py-6 text-center">{getPriorityBadge(patient.priority!)}</td>
-                                        </>
-                                    )}
+                                            </div>
+                                        </td>
 
-                                    <td className="px-8 py-6 text-right">
-                                        <div className="flex items-center justify-end gap-2">
-                                            <button
-                                                onClick={() => showNotification(`SMS reminder queued for ${patient.name}`)}
-                                                className="p-2.5 bg-white/5 border border-white/5 text-slate-500 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-all group/btn"
-                                                title="Send SMS"
-                                            >
-                                                <Smartphone size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => showNotification(`Email reminder sent to ${patient.name}`)}
-                                                className="p-2.5 bg-white/5 border border-white/5 text-slate-500 rounded-xl hover:bg-violet-500/10 hover:text-violet-400 transition-all"
-                                                title="Send Email"
-                                            >
-                                                <Mail size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => showNotification(`WhatsApp notification sent to ${patient.name}`)}
-                                                className="p-2.5 bg-white/5 border border-white/5 text-slate-500 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition-all"
-                                                title="WhatsApp Messenger"
-                                            >
-                                                <MessageSquare size={16} />
-                                            </button>
-                                            <div className="w-px h-6 bg-white/5 mx-2" />
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedPatient(patient);
-                                                    setIsEscalateModalOpen(true);
-                                                }}
-                                                className="px-4 py-2 bg-red-500/10 border border-red-500/30 text-red-500 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all"
-                                            >
-                                                ESCALATE
-                                            </button>
-                                        </div>
-                                    </td>
-                                </motion.tr>
-                            ))}
-                        </AnimatePresence>
-                    </tbody>
-                </table>
+                                        {filter === 'Upcoming' && (
+                                            <>
+                                                <td className="px-8 py-6">{getRiskBadge(patient.riskLevel)}</td>
+                                                <td className="px-8 py-6">
+                                                    <div className="flex items-center gap-2 text-sm font-bold text-slate-300">
+                                                        <Calendar size={14} className="text-indigo-400" />
+                                                        {patient.nextFollowUp}
+                                                    </div>
+                                                </td>
+                                                <td className="px-8 py-6 text-sm font-medium text-slate-400">{patient.doctor}</td>
+                                                <td className="px-8 py-6">
+                                                    <span className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${patient.status === 'Completed' ? 'text-emerald-400' : 'text-amber-500'}`}>
+                                                        <Clock size={12} /> {patient.status}
+                                                    </span>
+                                                </td>
+                                            </>
+                                        )}
+
+                                        {filter === 'Overdue' && (
+                                            <>
+                                                <td className="px-8 py-6 text-center">
+                                                    <span className={`px-4 py-1 rounded-lg font-mono font-bold text-lg ${patient.daysOverdue! > 3 ? 'bg-red-500/20 text-red-500' : 'bg-amber-500/20 text-amber-500'}`}>
+                                                        +{patient.daysOverdue}d
+                                                    </span>
+                                                </td>
+                                                <td className="px-8 py-6">{getRiskBadge(patient.riskLevel)}</td>
+                                                <td className="px-8 py-6 text-sm font-medium text-slate-400">{patient.lastContact}</td>
+                                            </>
+                                        )}
+
+                                        {filter === 'HighRisk' && (
+                                            <>
+                                                <td className="px-8 py-6">
+                                                    <div className="w-full max-w-[100px] h-1.5 bg-white/5 rounded-full overflow-hidden mt-1">
+                                                        <div
+                                                            className="h-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"
+                                                            style={{ width: `${patient.riskScore! * 100}%` }}
+                                                        />
+                                                    </div>
+                                                    <span className="text-[10px] font-black text-red-400 uppercase tracking-widest mt-2 inline-block">{(patient.riskScore! * 100).toFixed(0)}% Criticality</span>
+                                                </td>
+                                                <td className="px-8 py-6 text-sm font-bold text-slate-300 italic">"{patient.condition}"</td>
+                                                <td className="px-8 py-6 text-center">{getPriorityBadge(patient.priority!)}</td>
+                                            </>
+                                        )}
+
+                                        <td className="px-8 py-6 text-right">
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button
+                                                    onClick={() => showNotification(`SMS reminder queued for ${patient.name}`)}
+                                                    className="p-2.5 bg-white/5 border border-white/5 text-slate-500 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-all group/btn"
+                                                    title="Send SMS"
+                                                >
+                                                    <Smartphone size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => showNotification(`Email reminder sent to ${patient.name}`)}
+                                                    className="p-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-violet-500/10 hover:text-violet-400 transition-all"
+                                                    title="Send Email"
+                                                >
+                                                    <Mail size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => showNotification(`WhatsApp notification sent to ${patient.name}`)}
+                                                    className="p-2.5 bg-white/5 border border-white/5 text-slate-500 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition-all"
+                                                    title="WhatsApp Messenger"
+                                                >
+                                                    <MessageSquare size={16} />
+                                                </button>
+                                                <div className="w-px h-6 bg-white/5 mx-2" />
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedPatient(patient);
+                                                        setIsEscalateModalOpen(true);
+                                                    }}
+                                                    className="px-4 py-2 bg-red-500/10 border border-red-500/30 text-red-500 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all"
+                                                >
+                                                    ESCALATE
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </motion.tr>
+                                ))}
+                            </AnimatePresence>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {/* Escalation Modal */}

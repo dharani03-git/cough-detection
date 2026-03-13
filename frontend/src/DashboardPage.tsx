@@ -203,18 +203,18 @@ const DashboardPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-12"
         >
-            <header className="flex justify-between items-end">
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
                         <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-500/20">Active Engine v2.4</span>
                     </div>
-                    <h1 className="text-5xl font-black tracking-tighter">VocalVitals Engine</h1>
-                    <p className="text-slate-500 font-medium">Capture respiratory audio for real-time biomarker extraction.</p>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter">VocalVitals Engine</h1>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Capture respiratory audio for real-time biomarker extraction.</p>
                 </div>
-                <div className="flex gap-4">
-                    <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl flex items-center gap-4">
-                        <div className="text-right">
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Neural Latency</p>
+                <div className="flex gap-4 w-full md:w-auto">
+                    <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl flex items-center justify-between md:justify-start gap-4 flex-grow md:flex-grow-0">
+                        <div className="text-right md:text-left">
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest text-left">Neural Latency</p>
                             <p className="text-lg font-mono font-bold text-emerald-400">12ms</p>
                         </div>
                         <Zap className="text-emerald-400" size={20} />
@@ -222,13 +222,13 @@ const DashboardPage: React.FC = () => {
                 </div>
             </header>
 
-            <div className="grid grid-cols-12 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
                 {/* Capture Module */}
-                <div className="col-span-12 lg:col-span-8 space-y-10">
-                    <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] p-10 relative overflow-hidden group shadow-2xl">
+                <div className="col-span-1 lg:col-span-8 space-y-10">
+                    <div className="bg-[#030712] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 relative overflow-hidden group shadow-2xl">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
 
-                        <div className="flex justify-between items-center mb-10">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-indigo-500/10 rounded-xl">
                                     <Volume2 className="text-indigo-400" size={22} />
@@ -246,7 +246,7 @@ const DashboardPage: React.FC = () => {
                             {isRecording ? (
                                 <div className="flex flex-col items-center py-10 space-y-8">
                                     <div className="relative">
-                                        <div className="text-7xl font-mono font-black text-white tracking-tighter animate-pulse">{formatTime(recordingTime)}</div>
+                                        <div className="text-5xl md:text-7xl font-mono font-black text-white tracking-tighter animate-pulse">{formatTime(recordingTime)}</div>
                                         <div className="absolute -inset-10 bg-red-500/10 blur-3xl rounded-full animate-pulse -z-10" />
                                     </div>
                                     <div className="flex gap-2 items-end h-24">
@@ -267,74 +267,74 @@ const DashboardPage: React.FC = () => {
                                     </button>
                                 </div>
                             ) : !file ? (
-                                <div className="grid grid-cols-2 gap-10 py-10">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 py-10">
                                     <button
                                         type="button"
                                         onClick={startRecording}
-                                        className="w-full bg-white/5 border border-white/5 rounded-3xl p-10 flex flex-col items-center justify-center text-center gap-6 hover:bg-indigo-500/10 hover:border-indigo-500/40 transition-all cursor-pointer group shadow-xl appearance-none relative overflow-hidden active:scale-[0.98]"
+                                        className="w-full bg-white/5 border border-white/5 rounded-2xl md:rounded-3xl p-8 md:p-10 flex flex-col items-center justify-center text-center gap-6 hover:bg-indigo-500/10 hover:border-indigo-500/40 transition-all cursor-pointer group shadow-xl appearance-none relative overflow-hidden active:scale-[0.98]"
                                     >
                                         <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                        <div className="w-24 h-24 bg-indigo-500 rounded-full flex items-center justify-center shadow-2xl shadow-indigo-500/30 group-hover:scale-110 transition-transform relative z-10">
-                                            <Mic className="text-white" size={40} />
+                                        <div className="w-16 h-16 md:w-24 md:h-24 bg-indigo-500 rounded-full flex items-center justify-center shadow-2xl shadow-indigo-500/30 group-hover:scale-110 transition-transform relative z-10">
+                                            <Mic className="text-white" size={32} />
                                         </div>
                                         <div className="space-y-2">
-                                            <h4 className="text-2xl font-black">Live Capture</h4>
-                                            <p className="text-xs text-slate-500 leading-relaxed font-medium">Record 5-10s of sustained vowels<br />or cough samples</p>
+                                            <h4 className="text-xl md:text-2xl font-black">Live Capture</h4>
+                                            <p className="text-[10px] md:text-xs text-slate-500 leading-relaxed font-medium">Record 5-10s of sustained vowels<br />or cough samples</p>
                                         </div>
                                     </button>
-                                    <label className="w-full bg-white/5 border border-white/5 rounded-3xl p-10 flex flex-col items-center justify-center text-center gap-6 hover:bg-slate-500/10 hover:border-slate-500/40 transition-all cursor-pointer group shadow-xl relative overflow-hidden active:scale-[0.98]">
+                                    <label className="w-full bg-white/5 border border-white/5 rounded-2xl md:rounded-3xl p-8 md:p-10 flex flex-col items-center justify-center text-center gap-6 hover:bg-slate-500/10 hover:border-slate-500/40 transition-all cursor-pointer group shadow-xl relative overflow-hidden active:scale-[0.98]">
                                         <div className="absolute inset-0 bg-slate-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                                         <input type="file" className="hidden" accept=".wav,.mp3,audio/wav,audio/mpeg,audio/mp3,audio/x-wav,audio/x-mpeg" onChange={handleFileUpload} />
-                                        <div className="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform relative z-10">
-                                            <Upload className="text-slate-300" size={40} />
+                                        <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-800 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform relative z-10">
+                                            <Upload className="text-slate-300" size={32} />
                                         </div>
                                         <div className="space-y-2 relative z-10">
-                                            <h4 className="text-2xl font-black">Local Import</h4>
-                                            <p className="text-xs text-slate-500 leading-relaxed font-medium">Upload high-fidelity .WAV or .MP3<br />biometric data</p>
+                                            <h4 className="text-xl md:text-2xl font-black">Local Import</h4>
+                                            <p className="text-[10px] md:text-xs text-slate-500 leading-relaxed font-medium">Upload high-fidelity .WAV or .MP3<br />biometric data</p>
                                         </div>
                                     </label>
                                 </div>
                             ) : (
                                 <div className="py-6 space-y-10">
-                                    <div className="bg-white/5 border border-white/5 rounded-3xl p-8 flex items-center justify-between">
-                                        <div className="flex items-center gap-6">
+                                    <div className="bg-white/5 border border-white/5 rounded-2xl md:rounded-3xl p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                                        <div className="flex items-center gap-4 md:gap-6">
                                             <button
                                                 onClick={playAudio}
-                                                className="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center border border-emerald-500/20 hover:bg-emerald-500/30 transition-all group/play"
+                                                className="w-12 h-12 md:w-16 md:h-16 bg-emerald-500/20 rounded-xl md:rounded-2xl flex items-center justify-center border border-emerald-500/20 hover:bg-emerald-500/30 transition-all group/play"
                                             >
-                                                <Play className="text-emerald-400 fill-emerald-400 group-hover/play:scale-110 transition-transform" size={24} />
+                                                <Play className="text-emerald-400 fill-emerald-400 group-hover/play:scale-110 transition-transform" size={20} />
                                             </button>
                                             <div>
-                                                <h4 className="text-2xl font-black tracking-tight">{file.name}</h4>
-                                                <p className="text-xs font-black text-slate-500 uppercase tracking-widest mt-1">16-Bit PCM • Mono • 16kHz</p>
+                                                <h4 className="text-lg md:text-2xl font-black tracking-tight truncate max-w-[150px] md:max-w-none">{file.name}</h4>
+                                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">16-Bit PCM • Mono • 16kHz</p>
                                             </div>
                                         </div>
-                                        <div className="text-right">
-                                            <p className="text-2xl font-mono font-bold text-indigo-400 mb-1">{(file.size / 1024).toFixed(1)} KB</p>
-                                            <div className="flex items-center gap-2 justify-end text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                        <div className="text-left sm:text-right w-full sm:w-auto">
+                                            <p className="text-xl md:text-2xl font-mono font-bold text-indigo-400 mb-1">{(file.size / 1024).toFixed(1)} KB</p>
+                                            <div className="flex items-center gap-2 sm:justify-end text-[10px] font-black uppercase tracking-widest text-slate-500">
                                                 <div className="w-2 h-2 rounded-full bg-emerald-500" /> Integrity Verified
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex gap-4">
+                                    <div className="flex flex-col md:flex-row gap-4">
                                         <button
                                             onClick={resetAnalysis}
-                                            className="flex-[1] h-24 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-400 font-bold rounded-3xl transition-all flex items-center justify-center gap-3"
+                                            className="w-full md:flex-[1] h-16 md:h-24 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-400 font-bold rounded-2xl md:rounded-3xl transition-all flex items-center justify-center gap-3"
                                         >
-                                            <RefreshCw size={24} />
+                                            <RefreshCw size={20} />
                                             RE-RECORD
                                         </button>
                                         <button
                                             onClick={analyzeCough}
                                             disabled={isLoading}
-                                            className="flex-[3] h-24 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-2xl font-black rounded-3xl shadow-2xl shadow-indigo-600/20 transition-all flex items-center justify-center gap-4 disabled:opacity-50 relative overflow-hidden group"
+                                            className="w-full md:flex-[3] h-16 md:h-24 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xl md:text-2xl font-black rounded-2xl md:rounded-3xl shadow-2xl shadow-indigo-600/20 transition-all flex items-center justify-center gap-4 disabled:opacity-50 relative overflow-hidden group"
                                         >
                                             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform" />
                                             {isLoading ? (
-                                                <RefreshCw className="animate-spin" size={32} />
+                                                <RefreshCw className="animate-spin" size={24} />
                                             ) : (
                                                 <>
-                                                    <BrainCircuit size={32} />
+                                                    <BrainCircuit size={28} />
                                                     RUN NEURAL ANALYSIS
                                                 </>
                                             )}
@@ -346,7 +346,7 @@ const DashboardPage: React.FC = () => {
                     </div>
 
                     {/* Status Grids */}
-                    <div className="grid grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
                         {[
                             { label: 'Feature Space', val: '1064-dim', icon: Database, color: 'text-amber-400', bg: 'bg-amber-400/10' },
                             { label: 'Compliance', val: 'GDPR/HIPAA', icon: Lock, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
@@ -366,8 +366,8 @@ const DashboardPage: React.FC = () => {
                 </div>
 
                 {/* Results Sidebar */}
-                <div className="col-span-12 lg:col-span-4 h-full">
-                    <div className="bg-[#030712] border border-white/5 rounded-[2.5rem] p-8 h-full flex flex-col shadow-2xl relative overflow-hidden">
+                <div className="col-span-1 lg:col-span-4 h-full">
+                    <div className="bg-[#030712] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 h-full flex flex-col shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-8 opacity-5">
                             <Stethoscope size={160} />
                         </div>
